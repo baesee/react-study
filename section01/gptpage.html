@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>웹앱 레이아웃</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f5f5f5;
+                display: flex;
+                justify-content: center;
+            }
+            .container {
+                max-width: 400px;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .header {
+                background-color: #fff;
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .header img {
+                width: 40px;
+                height: 40px;
+            }
+            .header h1 {
+                font-size: 18px;
+                margin: 0;
+            }
+            .tabs {
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 20px;
+            }
+            .tabs a {
+                text-decoration: none;
+                color: #333;
+                padding: 10px 20px;
+                border-bottom: 2px solid transparent;
+            }
+            .tabs a.active {
+                border-bottom: 2px solid #4caf50;
+            }
+            .content {
+                padding: 20px;
+            }
+            .company-info {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .company-info img {
+                width: 60px;
+                height: 60px;
+                margin-right: 20px;
+            }
+            .company-info h2 {
+                font-size: 24px;
+                margin: 0;
+            }
+            .rating {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .rating span {
+                font-size: 24px;
+                margin-right: 10px;
+            }
+            .rating .stars {
+                display: flex;
+            }
+            .rating .stars span {
+                font-size: 24px;
+                color: #ffd700;
+            }
+            .button-container {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            .follow-button,
+            .write-button {
+                flex: 1;
+                padding: 10px 0;
+                text-align: center;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 0 5px;
+            }
+            .follow-button {
+                background-color: #fff;
+                border: 1px solid #4caf50;
+                color: #4caf50;
+            }
+            .write-button {
+                background-color: #4caf50;
+                color: #fff;
+            }
+            .review-summary {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+            .review-summary h3 {
+                margin: 0 0 10px;
+            }
+            .review-summary .rating-details {
+                display: flex;
+                justify-content: space-between;
+            }
+            .review-summary .rating-details div {
+                text-align: center;
+            }
+            .review-summary .rating-details div span {
+                display: block;
+                font-size: 18px;
+            }
+            .trend-summary {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+            .trend-summary h3 {
+                margin: 0 0 10px;
+            }
+            .trend-summary .chart {
+                width: 100%;
+                height: 200px;
+                background-color: #e0e0e0;
+                margin-bottom: 20px;
+            }
+            .trend-summary .details-button {
+                display: inline-block;
+                padding: 10px 20px;
+                text-align: center;
+                border-radius: 5px;
+                background-color: #fff;
+                border: 1px solid #4caf50;
+                color: #4caf50;
+                cursor: pointer;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .review-item {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+            .review-item .review-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            .review-item .review-header .rating {
+                display: flex;
+                align-items: center;
+            }
+            .review-item .review-header .rating span {
+                font-size: 24px;
+                margin-right: 10px;
+            }
+            .review-item .review-header .rating .stars span {
+                font-size: 24px;
+                color: #ffd700;
+            }
+            .review-item .review-header .date {
+                font-size: 14px;
+                color: #999;
+            }
+            .review-item .review-content {
+                margin-bottom: 10px;
+            }
+            .review-item .review-content .pros,
+            .review-item .review-content .cons {
+                margin-bottom: 10px;
+            }
+            .review-item .review-content .pros span,
+            .review-item .review-content .cons span {
+                display: block;
+                font-size: 14px;
+            }
+            .review-item .review-content .pros span {
+                color: #4caf50;
+            }
+            .review-item .review-content .cons span {
+                color: #f44336;
+            }
+            .review-item .review-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .review-item .review-footer .tags {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .review-item .review-footer .tags span {
+                background-color: #e0e0e0;
+                border-radius: 5px;
+                padding: 5px 10px;
+                margin-right: 5px;
+                font-size: 12px;
+            }
+            .review-item .review-footer .more-link {
+                font-size: 14px;
+                color: #4caf50;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .hidden-content {
+                display: none;
+            }
+            .typing {
+                border-right: 0.1em solid #4caf50;
+                white-space: nowrap;
+                overflow: hidden;
+                width: 0;
+                animation: typing 3.5s steps(40, end),
+                    blink-caret 0.75s step-end infinite;
+            }
+            @keyframes typing {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 100%;
+                }
+            }
+            @keyframes blink-caret {
+                from,
+                to {
+                    border-color: transparent;
+                }
+                50% {
+                    border-color: #4caf50;
+                }
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <img src="back-arrow.png" alt="뒤로가기" />
+                <h1>케어네이션(주)</h1>
+            </header>
+            <div class="tabs">
+                <a href="#" class="active">리뷰</a>
+                <a href="#">연봉</a>
+                <a href="#">면접</a>
+            </div>
+            <div class="content">
+                <div class="company-info">
+                    <img src="company-logo.png" alt="회사 로고" />
+                    <h2>케어네이션(주)</h2>
+                </div>
+                <div class="rating">
+                    <span>2.7</span>
+                    <div class="stars">
+                        <span>★</span>
+                        <span>★</span>
+                        <span>★</span>
+                        <span>☆</span>
+                        <span>☆</span>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div class="follow-button">+ 팔로우</div>
+                    <div class="write-button">작성하기</div>
+                </div>
+                <div class="review-summary">
+                    <h3>전체 만족도 통계 (41개)</h3>
+                    <div class="rating-details">
+                        <div>
+                            <span>복지/급여</span>
+                            <span>2.3</span>
+                        </div>
+                        <div>
+                            <span>워라밸</span>
+                            <span>3.8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trend-summary">
+                    <h3>총 만족도 연도별 트렌드</h3>
+                    <div class="chart"></div>
+                    <div class="details-button">세부 만족도 트렌드 보기</div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="rating">
+                            <span>1.0</span>
+                            <div class="stars">
+                                <span>★</span>
+                                <span>☆</span>
+                                <span>☆</span>
+                                <span>☆</span>
+                                <span>☆</span>
+                            </div>
+                        </div>
+                        <div class="date">2024.06</div>
+                    </div>
+                    <div class="review-content">
+                        <p class="typing">
+                            주니어 잔치 대비 시니어가 별로 없음
+                        </p>
+                        <div class="pros">
+                            <span class="typing">장점</span>
+                            <span class="typing"
+                                >나름 짧은 근무시간, 점심 식대 제공, 배달도
+                                가능, 간식</span
+                            >
+                        </div>
+                        <div class="cons">
+                            <span class="typing">단점</span>
+                            <span class="typing hidden-content"
+                                >금요일 일찍 퇴근 대신에 직원들이 사무실 청소,
+                                시니어 부재로 체계가 없음, 인사팀 없어서 조직
+                                관리가 어려움</span
+                            >
+                        </div>
+                    </div>
+                    <div class="review-footer">
+                        <div class="tags">
+                            <span>개발</span>
+                            <span>전직장</span>
+                        </div>
+                        <a class="more-link" onclick="toggleContent(this)"
+                            >더보기</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function toggleContent(element) {
+                const hiddenContent = $(element)
+                    .closest('.review-item')
+                    .find('.hidden-content');
+                if (hiddenContent.is(':visible')) {
+                    hiddenContent.slideUp();
+                    $(element).text('더보기');
+                } else {
+                    hiddenContent.slideDown();
+                    $(element).text('접기');
+                }
+            }
+
+            $(document).ready(function () {
+                $('.typing').each(function (index) {
+                    const element = $(this);
+                    setTimeout(function () {
+                        element.css('width', '100%');
+                    }, index * 1000); // 각 요소에 대해 1초 간격으로 타이핑 애니메이션 시작
+                });
+            });
+        </script>
+    </body>
+</html>
