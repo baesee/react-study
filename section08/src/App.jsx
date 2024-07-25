@@ -8,7 +8,7 @@ const mockData = [
     {
         id: 0,
         isDone: false,
-        content: '리액트 공부하기',
+        content: 'React 공부하기',
         date: new Date().getTime(),
     },
     {
@@ -38,11 +38,26 @@ function App() {
         };
         setTodos([newTodo, ...todos]);
     };
+
+    const onUpdate = (targetId) => {
+        // todos State의 값들 중에
+        // targetId와 일치하는 id를 갖는 todo 아이템의 isDone을 toggle
+        // 그리고 새로운 배열을 만들어서 todos State를 업데이트
+        const newTodos = todos.map((todo) =>
+            todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
+        );
+        setTodos(newTodos);
+    };
+
+    const onDelete = (targetId) => {
+        setTodos(todos.filter((todo) => todo.id !== targetId));
+    };
+
     return (
         <div className="App">
             <Header />
             <Editor onCreate={onCreate} />
-            <List />
+            <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
         </div>
     );
 }
